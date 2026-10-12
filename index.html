@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0f766e">
+  <meta name="description" content="Simple health triage guidance for rural and Tier-2 India.">
+  <title>SwasthyaSathi AI — Simple Health Triage</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="#" aria-label="SwasthyaSathi AI home"><span class="brand-icon">♥</span><span><strong>SwasthyaSathi AI</strong><small>Simple health triage</small></span></a>
+    <nav class="nav" id="navLinks" aria-label="Main navigation">
+      <a href="#main" data-i18n="navHome">Home</a><a href="#how" data-i18n="navHow">How it works</a>
+      <a href="#emergency" data-i18n="navEmergency">Emergency</a><a href="#care" data-i18n="navCare">Find care</a>
+    </nav>
+    <div class="header-actions">
+      <label class="sr-only" for="languageSelect">Choose language</label>
+      <select id="languageSelect" aria-label="Choose language">
+        <option value="en">English</option><option value="hi">हिन्दी</option><option value="mr">मराठी</option>
+        <option value="bn">বাংলা</option><option value="gu">ગુજરાતી</option><option value="pa">ਪੰਜਾਬੀ</option>
+        <option value="ta">தமிழ்</option><option value="te">తెలుగు</option>
+      </select>
+      <button id="themeToggle" class="icon-button" type="button" aria-label="Switch theme" title="Switch theme">☾</button>
+      <button id="menuToggle" class="icon-button menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero section-wrap">
+      <div class="hero-copy">
+        <span class="eyebrow"><span class="pulse-dot"></span> SUPPORT WHEN YOU NEED IT</span>
+        <h1 data-i18n="heroTitle">Understand how urgently you should seek care.</h1>
+        <p data-i18n="heroText">Describe your symptoms by voice or text and get simple triage guidance in your preferred language.</p>
+        <div class="hero-actions"><a class="button primary" href="#triage">🎤 <span data-i18n="speakBtn">Speak symptoms</span></a><a class="button secondary" href="#triage">⌨️ <span data-i18n="typeBtn">Type symptoms</span></a></div>
+        <p class="microcopy">ⓘ <span data-i18n="notDiagnosis">Not a diagnosis • General triage guidance only</span></p>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+        <div class="health-card"><span class="health-cross">+</span><div><strong>Your health matters</strong><small>Clear guidance, in your language</small></div><span class="shield">✓</span></div>
+        <div class="floating-chip chip-a">🎙️ Voice input</div><div class="floating-chip chip-b">🌐 8 languages</div>
+      </div>
+    </section>
+
+    <section class="section-wrap" id="triage">
+      <div class="section-heading"><span class="eyebrow">START HERE</span><h2 data-i18n="formTitle">What are you experiencing?</h2><p data-i18n="formSub">Tell us what is happening. You can edit voice-to-text before checking urgency.</p></div>
+      <div class="triage-layout">
+        <form id="triageForm" class="panel form-panel">
+          <label for="symptoms" data-i18n="symptomsLabel">Describe your symptoms</label>
+          <textarea id="symptoms" name="symptoms" rows="5" maxlength="1500" required placeholder="Example: Mujhe 2 din se bukhar hai aur weakness ho rahi hai..."></textarea>
+          <div class="field-row between"><span id="charCount" class="muted">0 / 1500</span><span id="voiceStatus" class="status" aria-live="polite"></span></div>
+          <div class="voice-actions"><button type="button" class="button secondary" id="startVoice">🎤 <span data-i18n="startVoice">Speak symptoms</span></button><button type="button" class="button ghost" id="stopVoice" disabled>■ <span data-i18n="stopVoice">Stop</span></button></div>
+          <div class="divider"></div>
+          <details class="optional-details"><summary data-i18n="optionalInfo">Optional information (you can skip)</summary>
+            <div class="field-grid">
+              <div><label for="age" data-i18n="ageLabel">Age</label><input id="age" type="number" min="0" max="120" placeholder="e.g. 24"></div>
+              <div><label for="gender" data-i18n="genderLabel">Gender (optional)</label><select id="gender"><option value="">Prefer not to say</option><option>Female</option><option>Male</option><option>Other</option></select></div>
+              <div class="full"><label for="pregnancy" data-i18n="pregLabel">Pregnancy status (optional)</label><select id="pregnancy"><option value="">Prefer not to say</option><option value="yes">Yes</option><option value="no">No</option><option value="unknown">Not sure</option></select></div>
+            </div>
+          </details>
+          <div class="sample-area"><p class="label-like" data-i18n="trySample">Try a sample</p><div class="sample-buttons">
+            <button type="button" class="sample" data-sample="Mild fever and tiredness">Mild fever + tiredness</button>
+            <button type="button" class="sample" data-sample="Fever and vomiting">Fever + vomiting</button>
+            <button type="button" class="sample" data-sample="Headache for two days">Headache</button>
+            <button type="button" class="sample" data-sample="Stomach pain">Stomach pain</button>
+            <button type="button" class="sample danger-sample" data-sample="Severe chest pain and difficulty breathing">Severe chest pain</button>
+            <button type="button" class="sample danger-sample" data-sample="I am having severe difficulty breathing">Difficulty breathing</button>
+          </div></div>
+          <button id="analyzeButton" class="button primary full-button" type="submit" disabled>✓ <span data-i18n="checkUrgency">Check urgency</span></button>
+          <p class="tiny-note" data-i18n="privacyNote">Your symptoms are not saved by this page. Avoid entering unnecessary personal details.</p>
+        </form>
+        <aside class="side-panel">
+          <div class="mini-card"><span class="mini-icon">🛡️</span><h3 data-i18n="safeTitle">Safety first</h3><p data-i18n="safeText">This tool does not diagnose conditions or prescribe medicines.</p></div>
+          <div class="mini-card"><span class="mini-icon">🌿</span><h3 data-i18n="simpleTitle">Simple guidance</h3><p data-i18n="simpleText">Information is written to be easier to understand.</p></div>
+          <div class="mini-card warning-mini"><span class="mini-icon">🚨</span><h3 data-i18n="urgentTitle">Urgent symptoms?</h3><p data-i18n="urgentText">Do not wait for this tool if you think it is an emergency.</p></div>
+        </aside>
+      </div>
+      <div id="loadingState" class="loading panel hidden" role="status"><span class="spinner"></span><div><strong data-i18n="analyzing">Reviewing your information…</strong><p data-i18n="pleaseWait">Please wait.</p></div></div>
+      <div id="errorBox" class="error-box hidden" role="alert"></div>
+      <section id="resultCard" class="result-card panel hidden" aria-live="polite"></section>
+    </section>
+
+    <section class="soft-section" id="how"><div class="section-wrap">
+      <div class="section-heading"><span class="eyebrow">THREE SIMPLE STEPS</span><h2 data-i18n="howTitle">How it works</h2><p data-i18n="howSub">A simple starting point for understanding urgency.</p></div>
+      <div class="steps-grid"><article class="step-card"><span>01</span><h3 data-i18n="step1Title">Speak or type</h3><p data-i18n="step1Text">Describe what you are experiencing in your language.</p></article><article class="step-card"><span>02</span><h3 data-i18n="step2Title">Check urgency</h3><p data-i18n="step2Text">The system checks for warning signs and provides triage guidance.</p></article><article class="step-card"><span>03</span><h3 data-i18n="step3Title">Find care</h3><p data-i18n="step3Text">Search for nearby healthcare facilities or use a map search.</p></article></div>
+      <p class="center-note">AI triage does not replace a qualified healthcare professional.</p>
+    </div></section>
+
+    <section class="section-wrap" id="emergency"><div class="section-heading"><span class="eyebrow">PLEASE TAKE CARE</span><h2 data-i18n="emergencyTitle">When should you seek emergency help?</h2><p data-i18n="emergencySub">Get immediate professional help if any of these serious warning signs occur.</p></div>
+      <div class="emergency-grid"><article>🫁 <strong>Severe breathing difficulty</strong></article><article>❤️ <strong>Severe chest pain</strong></article><article>🆘 <strong>Unconsciousness or seizure</strong></article><article>🩹 <strong>Severe bleeding</strong></article><article>⚡ <strong>Sudden weakness or paralysis</strong></article><article>⚠️ <strong>Severe allergic reaction</strong></article></div>
+      <div class="emergency-banner"><strong>If you believe this is life-threatening, seek emergency medical help immediately.</strong><span>Do not delay professional help to use this website.</span></div>
+    </section>
+
+    <section class="soft-section" id="care"><div class="section-wrap care-layout">
+      <div><span class="eyebrow">CARE NEAR YOU</span><h2 data-i18n="careTitle">Find care near me</h2><p data-i18n="careText">Use your location to search for healthcare facilities. If live search is unavailable, open a manual map search.</p>
+        <div class="care-buttons"><button class="button primary" id="locateButton" type="button">📍 Find nearby care</button><a class="button secondary" id="manualMapLink" href="https://www.google.com/maps/search/hospital+near+me/" target="_blank" rel="noopener">Open Google Maps ↗</a></div>
+        <form id="manualSearchForm" class="manual-search"><label for="placeSearch">Search by village, town, city or PIN code</label><div class="search-row"><input id="placeSearch" placeholder="e.g. Ghaziabad 201001"><button class="button secondary" type="submit">Search</button></div></form>
+      </div>
+      <div class="panel care-results"><div class="care-result-heading"><span class="mini-icon">🏥</span><div><h3>Healthcare search</h3><p id="careStatus" aria-live="polite">Nearby care results will appear here.</p></div></div><div id="careResults"></div></div>
+    </div></section>
+
+    <section class="section-wrap privacy-section"><div class="privacy-icon">🔒</div><div><h2>Your health matters.</h2><p>This project provides general triage guidance only. It does not diagnose a medical condition. Avoid entering unnecessary personal information. Symptom text is not stored by the application by default.</p></div></section>
+  </main>
+  <footer class="footer"><div class="footer-brand"><span class="brand-icon">♥</span><div><strong>SwasthyaSathi AI</strong><p>AI-assisted symptom triage for rural and Tier-2 communities.</p></div></div><div class="footer-links"><a href="#main">Home</a><a href="#how">How it works</a><a href="#emergency">Emergency</a><a href="#care">Find care</a></div><p class="disclaimer">This application is a student software demonstration, not a medical decision system or a substitute for a qualified healthcare professional.</p></footer>
+  <div id="toast" class="toast hidden" role="status"></div>
+</body>
+</html>
